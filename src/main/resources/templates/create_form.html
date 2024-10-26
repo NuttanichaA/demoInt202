@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns=http://www.w3.org/1999/xhtml xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--    link ของ bootstrap, framework of css-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+<h1>Please</h1>
+<h1 class="text-danger">Office detail</h1>
+<hr>
+<div class="container p4 m4">
+    <form method="post" action="/offices/create">
+        Office code: <input type="text" name="officeCode"/><br>
+        City: <input type="text" name="city"/><br>
+        Phone: <input type="text" name="phone"/><br>
+        Address: <input type="text" name="addressLine1"/><br>
+        Country: <input type="text" name="country"/><br>
+        Postal code: <input type="text" name="postalCode"/><br>
+        Territory: <input type="text" name="territory" value="NA"/>
+        <hr>
+        <input style="background-color: royalblue;" type="submit" value="Save"/>
+    </form>
+</div>
+<hr>
+<a href="/home">
+    <button>Home</button>
+</a>
+<hr>
+<a href="/offices/all">
+    <button>All Offices</button>
+</a>
+</body>
+</html>
