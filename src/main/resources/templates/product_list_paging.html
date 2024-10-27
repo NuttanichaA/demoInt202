@@ -13,9 +13,26 @@
 <hr>
 <div class="container p4 m4">
     <div class="row w-100">
-        <div class="col-2 h3"> Product Listing </div>
+        <div class="row w-100">
+            <div class="h3"> Product Listing</div>
+            <form action="/products/page">
+                <div class="col-8 pt-2">
+                    <input type="text" size="30px" name="searchParam" th:value="${param.searchParam}"
+                           placeholder="enter any keyword to search product"/>
+                    <input type="number" name="lower" min="10.0" max="9999.99" th:value="${param.lower}"
+                           placeholder="min price"/>
+                    <input type="number" name="upper" min="10.0" max="9999.99" th:value="${param.upper}"
+                           placeholder="max price"/>
+                    <input type="submit" value="Search"/>
+                </div>
+            </form>
+        </div>
     </div>
-    <div class="row h6 bg-light">
+    <br>
+    <div class="row h2 text-danger" th:if="${page == null or #lists.isEmpty(page.content)}">
+        Product does not exist!!!
+    </div>
+    <div class="row h6 bg-light" th:if="${page != null and not #lists.isEmpty(page.content)}">
         <div class="col-1">Code</div>
         <div class="col-3">Product Name</div>
         <div class="col-2">Product Line</div>
@@ -24,7 +41,7 @@
         <div class="col-1">Price</div>
     </div>
     <div class="row" th:each="p : ${page.content}">
-<!--        th:text th-จะตามด้วย attribute ของ html tag ที่เราอยากให้ body มีข้อมูลจาก model-->
+        <!--        th:text th-จะตามด้วย attribute ของ html tag ที่เราอยากให้ body มีข้อมูลจาก model-->
         <div class="col-1" th:text="${p.productCode}"/>
         <div class="col-3" th:text="${p.productName}"/>
         <div class="col-2" th:text="${p.productLine.productLine}"/>
@@ -35,16 +52,17 @@
 </div>
 <hr>
 <!--   still not completed(by prof.)-->
-<a class="p-2" th:text="${index}"
-   th:each="index : ${#numbers.sequence(1, page.totalPages)}"
-   th:href="@{'/products/page?pageNumber=' + ${index}}"/>
+<span th:each="index : ${#numbers.sequence(0, page.totalPages - 1)}">
+        <a th:href="@{'/products/page'(searchParam=${searchParam}, lower=${lower}, upper=${upper}, pageNumber=${index}, pageSize=${page.size})}"
+           th:text="${index + 1}" class="p-2"></a>
+    </span>
+
 <a href="/home">
     <button>Home</button>
 </a>
 <span style="margin-left: 20px; margin-right: 20px"> | </span>
 <a href="#">
     <button style="background-color: cadetblue; color: ghostwhite">Add New Product</button>
-<!--    ไปทำเองด้วย!!!!!-->
 </a>
 </body>
 </html>
