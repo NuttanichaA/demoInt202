@@ -65,7 +65,7 @@ public class ProductController {
 //        model.addAttribute("products", page);
 //        return "product_list_paging";
 //    }
-    @GetMapping("/page") // Combined endpoint for listing and searching
+    @GetMapping("/page")
     public String getProducts(
             @RequestParam(required = false) String searchParam,
             @RequestParam(required = false) Double lower,
